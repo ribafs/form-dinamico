@@ -1,5 +1,5 @@
 # form-dinamico
-Adicionar e remover campos dinamicamene em formularios.
+Adicionar e remover campos dinamicamente em formularios.
 
 ## Credito
 
