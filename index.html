@@ -1,43 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form dinãmico</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-</head>
-<body>
+<html>
+  <head>
+    <title>Dynamic Fields</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+<style>
+body {
+  background-color: #c1cce0;
+  font-family: 'Jost',sans-serif;
+  color: #fff;
+}
+h1 {
+  text-align: center;
+  font-size: 48px;
+  color: #232c3d;
+}
 
-<div class="container text-center">
-<h3>Form dinâmico</h3>
-    <button class="add_form_field">Add New Field &nbsp; 
-      <span style="font-size:16px; font-weight:bold;">+ </span>
-    </button>
-    <div><input type="text" name="mytext[]"></div>
-</div>
+.container {
+  width: 400px;
+  margin: 40px auto;
+  padding: 10px;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+}
+
+input[type="text"]{
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  background: none;
+  width: 274px;
+  color: black;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+input[type="Submit"]{
+  margin: 10px auto;
+  display: block;
+  width: 40%;
+  height: 40px;
+  border: 1px solid;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+input[type="Submit"]:hover{
+  background: #2691d9;
+  color: #e9f4fb;
+  transition: .5s;
+}
+
+.controls {
+  width: 294px;
+  margin: 15px auto;
+}
+
+.add {
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.remove {
+  float: right;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.controls button i{
+  margin-right: 5px;
+}
+
+.remove:hover, .add:hover{
+  background: #2691d9;
+  color: #e9f4fb;
+  transition: .5s;
+}
+</style/>
+
+  </head>
+  <body>
+    <h1>codewithFaraz</h1>
+    <div class="container">
+      <form action="" method="POST">
+      <div id="formfield">
+        <input type="text" name="text" class="text" size="50" placeholder="Name" required>
+        <input type="text" name="text" class="text" size="50" placeholder="Email" required>
+        <input type="text" name="text" class="text" size="50" placeholder="Optional Field">
+      </div>
+      <input name="submit" type="Submit" value="Submit">
+    </form>
+      <div class="controls">
+        <button class="add" onclick="add()"><i class="fa fa-plus"></i>Add</button>
+        <button class="remove" onclick="remove()"><i class="fa fa-minus"></i>Remove</button>
+      </div>
+    </div>
 <script>
-//https://stackoverflow.com/questions/14853779/dynamically-creating-a-specific-number-of-input-form-elements
-$(document).ready(function() {
-    var max_fields = 10;
-    var wrapper = $(".container");
-    var add_button = $(".add_form_field");
+var formfield = document.getElementById('formfield');
 
-    var x = 1;
-    $(add_button).click(function(e) {
-        e.preventDefault();
-        if (x < max_fields) {
-            x++;
-            $(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="delete">x</a></div>'); //add input box
-        } else {
-            alert('You Reached the limits')
-        }
-    });
+function add(){
+  var newField = document.createElement('input');
+  newField.setAttribute('type','text');
+  newField.setAttribute('name','text');
+  newField.setAttribute('class','text');
+  newField.setAttribute('siz',50);
+  newField.setAttribute('placeholder','Optional Field');
+  formfield.appendChild(newField);
+}
 
-    $(wrapper).on("click", ".delete", function(e) {
-        e.preventDefault();
-        $(this).parent('div').remove();
-        x--;
-    })
-});
-</script>
+function remove(){
+  var input_tags = formfield.getElementsByTagName('input');
+  if(input_tags.length > 2) {
+    formfield.removeChild(input_tags[(input_tags.length) - 1]);
+  }
+}
+// https://www.codewithfaraz.com/content/8/how-to-create-form-fields-dynamically-with-javascript
+</script>  
+  </body>
+</html>
